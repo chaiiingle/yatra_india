@@ -7,7 +7,7 @@ export const TIME_OPTIONS: TimeOption[] = [
 export const CATEGORIES = Object.values(SpotCategory);
 
 // Helper to generate consistent images
-const getImg = (id: number) => `https://picsum.photos/seed/${id}/800/600`;
+//const getImg = (id: number) => `https://picsum.photos/seed/${id}/800/600`;
 
 export const DESTINATIONS_DATA = {
   [DestinationName.JUNNAR]: {
@@ -361,7 +361,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.SCENIC_POINT],
     durationHours: 1.0,
     description: 'The cliffs here naturally form the shape of an elephant\'s head and trunk.',
-    imageUrl: 'https://www.trawell.in/admin/images/upload/162482708Mahabaleshwar_Arthur_%20Seat_Point_Main.jpg',
+    imageUrl: 'https://i.pinimg.com/1200x/2f/83/10/2f8310ad0f0b572c198881be095fd203.jpg',
     mapQuery: 'Elephant\'s Head Point Mahabaleshwar',
     intensity: 'Light'
   },
