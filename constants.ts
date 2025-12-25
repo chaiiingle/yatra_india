@@ -14,13 +14,13 @@ export const DESTINATIONS_DATA = {
     themeColor: 'junnar',
     tagline: 'Land of Shivneri & Ancient Caves',
     description: 'A historic city known as the birthplace of Chhatrapati Shivaji Maharaj, surrounded by the Sahyadri mountains, ancient rock-cut caves, and lush greenery.',
-    heroImage: 'https://sl.bing.net/iYdVbVgFIDQ',
+    heroImage: 'https://thumbs.dreamstime.com/b/animals-carved-pillars-buddhist-caves-lenyadri-junnar-series-rock-cut-located-kilometres-mi-north-pune-214976728.jpg?w=768',
   },
   [DestinationName.MAHABALESHWAR]: {
     themeColor: 'maha',
     tagline: 'Strawberries, Mist & Valleys',
     description: 'A mesmerizing hill station featuring deep evergreen forests, strawberry farms, and ancient temples, offering panoramic views of the Deccan Plateau.',
-    heroImage: 'https://live.staticflickr.com/815/39959686265_cf11678f66_b.jpg',
+    heroImage: 'https://www.stone-shelter.com/places-to-visit-mahabaleshwar/elephants-head-point-mahabaleshwar.jpg',
   },
   [DestinationName.OOTY]: {
     themeColor: 'ooty',
@@ -160,7 +160,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.RELIGIOUS, SpotCategory.HISTORIC],
     durationHours: 0.5,
     description: 'A historic temple dedicated to Lord Shiva, known for its spiritual ambience.',
-    imageUrl: 'https://sl.bing.net/elQLyJpFyoK',
+    imageUrl: 'https://as1.ftcdn.net/v2/jpg/04/80/32/10/1000_F_480321008_y4sh1DSbVXmjdb1xgMCjFPkb5cBCyKwx.jpg',
     mapQuery: 'Pancha Linga Temple Junnar',
     intensity: 'Light'
   },
@@ -171,7 +171,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.TREK, SpotCategory.FORT],
     durationHours: 4.0,
     description: 'A rugged hill fort famously used to guard the Naneghat trade route. Ideal for trekkers.',
-    imageUrl: 'https://sl.bing.net/ObL5KkeUJo',
+    imageUrl: 'https://imoutdoor.com/wp-content/uploads/2020/07/Korigad-Fort-Trek-768x513.jpeg',
     mapQuery: 'Jivdhan Fort',
     intensity: 'Heavy'
   },
@@ -204,7 +204,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.CAVE, SpotCategory.HISTORIC],
     durationHours: 1.5,
     description: 'Ancient rock-cut caves on Manmodi hill, featuring distinct architectural styles.',
-    imageUrl: 'https://sl.bing.net/PEcT4jSWt2',
+    imageUrl: 'https://www.nativeplanet.com/photos/560x292/2018/08/photo-91-175322-10.jpg',
     mapQuery: 'Manmodi Caves Junnar',
     intensity: 'Moderate'
   },
@@ -215,7 +215,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.HISTORIC, SpotCategory.RELIGIOUS],
     durationHours: 1.0,
     description: 'A 12th-century Hemadpanti-style Shiva temple on the river bank.',
-    imageUrl: 'https://sl.bing.net/goCXk5EC8DQ',
+    imageUrl: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE3e_Y0FYUET8TWpsXSL191CxQox5QUu1BpXqveihb1uyZzXHTK0kEgQGtm-Y7dqdA972RKRAw9I_wCGP8Usu6KAhzWa0zhmCi1nfC27qvgjkkHxaSJ7oyEAWhjtZA1vSVvd5gsOPfJI2Vs1mtuvXniwRHsxBVuMY1E3-eoNIo9mI5Cs3fg7FD3Yrb/s1024/IMG_20180629_124035.jpg',
     mapQuery: 'Kukdeshwar Temple Junnar',
     intensity: 'Moderate'
   },
@@ -226,7 +226,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.WILDLIFE],
     durationHours: 1.5,
     description: 'A rehabilitation center for leopards. Entry is restricted/subject to permission.',
-    imageUrl: 'https://sl.bing.net/efRhezpfaKG',
+    imageUrl: 'https://tse4.mm.bing.net/th/id/OIP.9aMZUMXc-w_Wn6nGg5T8fgHaEO?rs=1&pid=ImgDetMain&o=7&rm=3',
     mapQuery: 'Manikdoh Leopard Rescue Centre',
     intensity: 'Moderate'
   },
@@ -248,7 +248,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.TREK, SpotCategory.FORT],
     durationHours: 3.5,
     description: 'Unique fort architecture with underground granaries and rock-cut structures.',
-    imageUrl: 'https://sl.bing.net/1ok8qtLq0G',
+    imageUrl: 'https://i.pinimg.com/originals/f8/8d/de/f88dde500be068a78624f4fabe315832.jpg',
     mapQuery: 'Hadsar Fort',
     intensity: 'Heavy'
   },
@@ -350,7 +350,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.SCENIC_POINT],
     durationHours: 2.0,
     description: 'The Queen of all points. Shows the contrast between the Konkan and the Deccan territories.',
-    imageUrl: getImg(209),
+    imageUrl: 'https://hblimg.mmtcdn.com/content/hubble/img/Mahabaleshwar/mmt/activities/m_activities_arthurs_seat_5_l_360_640.jpg',
     mapQuery: 'Arthur\'s Seat Mahabaleshwar',
     intensity: 'Moderate'
   },
@@ -405,7 +405,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.RELIGIOUS, SpotCategory.HISTORIC],
     durationHours: 1.0,
     description: 'An ancient Hemadpanti style Shiva temple, housing a Swayambhu Lingam.',
-    imageUrl: 'https://sl.bing.net/g4y6hSs8ue4',
+    imageUrl: 'https://tse2.mm.bing.net/th/id/OIP.tnds448MUZFc6kn56Hls_QHaE8?rs=1&pid=ImgDetMain&o=7&rm=3',
     mapQuery: 'Mahabaleshwar Temple',
     intensity: 'Moderate'
   },
