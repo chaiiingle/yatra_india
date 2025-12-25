@@ -14,13 +14,13 @@ export const DESTINATIONS_DATA = {
     themeColor: 'junnar',
     tagline: 'Land of Shivneri & Ancient Caves',
     description: 'A historic city known as the birthplace of Chhatrapati Shivaji Maharaj, surrounded by the Sahyadri mountains, ancient rock-cut caves, and lush greenery.',
-    heroImage: 'https://thumbs.dreamstime.com/b/animals-carved-pillars-buddhist-caves-lenyadri-junnar-series-rock-cut-located-kilometres-mi-north-pune-214976728.jpg?w=768',
+    heroImage: 'https://i.pinimg.com/1200x/7f/46/43/7f4643effa4d1a28fb8809c347d3226b.jpg',
   },
   [DestinationName.MAHABALESHWAR]: {
     themeColor: 'maha',
     tagline: 'Strawberries, Mist & Valleys',
     description: 'A mesmerizing hill station featuring deep evergreen forests, strawberry farms, and ancient temples, offering panoramic views of the Deccan Plateau.',
-    heroImage: 'https://www.stone-shelter.com/places-to-visit-mahabaleshwar/elephants-head-point-mahabaleshwar.jpg',
+    heroImage: 'https://preview.redd.it/ec3z2wtb5e9g1.jpg?width=1080&crop=smart&auto=webp&s=2bc8602b7317edd2faef980c3ff974dd282b6888',
   },
   [DestinationName.OOTY]: {
     themeColor: 'ooty',
