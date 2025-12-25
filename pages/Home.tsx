@@ -11,7 +11,7 @@ const Home: React.FC = () => {
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://picsum.photos/seed/travel_india_hero/1920/1080" 
+            src="https://wallpaperaccess.com/full/2023261.jpg" 
             alt="India Landscape" 
             className="w-full h-full object-cover"
           />
