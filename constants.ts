@@ -7,7 +7,7 @@ export const TIME_OPTIONS: TimeOption[] = [
 export const CATEGORIES = Object.values(SpotCategory);
 
 // Helper to generate consistent images
-
+const getImg = (id: number) => `https://picsum.photos/seed/${id}/800/600`;
 
 export const DESTINATIONS_DATA = {
   [DestinationName.JUNNAR]: {
