@@ -325,7 +325,7 @@ export const SPOTS_DB: TouristSpot[] = [
     id: 'm7',
     name: 'Lodwick Point',
     destination: DestinationName.MAHABALESHWAR,
-    categories: [SpotCategory.SCENIC_POINT, SpotCategory.NATURE, SpotCategory.SELFIEPOINT],
+    categories: [SpotCategory.SCENIC_POINT, SpotCategory.NATURE, SpotCategory.SELFIE_POINT],
     durationHours: 1.0,
     description: 'Features a memorial pole and offers unobstructed views of the forest.',
     imageUrl: 'https://www.trawell.in/admin/images/upload/162483942Mahabaleshwar_Lodwick_Point_Main.jpg',
