@@ -391,7 +391,7 @@ export const SPOTS_DB: TouristSpot[] = [
     id: 'm13',
     name: 'Chinaman\'s Falls',
     destination: DestinationName.MAHABALESHWAR,
-    categories: [SpotCategory.WATERFALL, , SpotCategory.NATURE, SpotCategory.SCENIC_POINT],
+    categories: [SpotCategory.WATERFALL, SpotCategory.NATURE, SpotCategory.SCENIC_POINT],
     durationHours: 1.0,
     description: 'A beautiful tiered waterfall named after the Chinese gardens formerly located nearby.',
     imageUrl: 'https://im.whatshot.in/img/2020/Sep/jog-falls-at-shimoga-20181225230640-cropped-1-1601464295.jpg',
