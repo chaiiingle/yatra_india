@@ -383,7 +383,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.WATERFALL, SpotCategory.NATURE],
     durationHours: 1.5,
     description: 'A majestic waterfall with two levels. The main fall plunges 500 feet.',
-    imageUrl: 'https://media-cdn.tripadvisor.com/media/photo-s/11/81/ca/90/mandir.jpg',
+    imageUrl: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/b0/12/1f/the-majestic-lingmala.jpg?w=1200&h=1200&s=1',
     mapQuery: 'Lingmala Waterfall',
     intensity: 'Moderate'
   },
@@ -460,7 +460,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.MARKET, SpotCategory.SHOPPING],
     durationHours: 1.5,
     description: 'The best place for leather goods, wooden artifacts, and fresh produce.',
-    imageUrl: 'https://d3gw4aml0lneeh.cloudfront.net/assets/locations/nMFQptARZOxF.jpg',
+    imageUrl: 'https://www.treebo.com/blog/wp-content/uploads/2018/03/Sarafa-Bazaar-1.jpg',
     mapQuery: 'Mahabaleshwar Market',
     intensity: 'Light'
   },
@@ -468,7 +468,7 @@ export const SPOTS_DB: TouristSpot[] = [
     id: 'm20',
     name: 'Panchganga Temple',
     destination: DestinationName.MAHABALESHWAR,
-    categories: [SpotCategory.RELIGIOUS],
+    categories: [SpotCategory.RELIGIOUS, SpotCategory.HISTORIC],
     durationHours: 1.0,
     description: 'Peaceful ancient temple where the union of 5 rivers bless the devotees. ',
     imageUrl: 'https://tse3.mm.bing.net/th/id/OIP.s9zAfVO8qsPuFcblssDcfgHaE8?pid=ImgDet&w=474&h=316&rs=1&o=7&rm=3',
