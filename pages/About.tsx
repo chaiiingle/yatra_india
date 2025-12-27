@@ -8,7 +8,7 @@ const About: React.FC = () => {
         <div className="bg-white rounded-2xl shadow-sm p-8 md:p-12 mb-8">
            <h1 className="text-4xl font-serif font-bold text-stone-900 mb-6">Philosophy</h1>
            <p className="text-lg text-stone-600 leading-relaxed mb-6">
-             Tripp.in was born from a simple observation: Modern travel has become a checklist exercise. We rush from point A to point B, capturing photos but missing the moment.
+             Yatra was born from a simple observation: Modern travel has become a checklist exercise. We rush from point A to point B, capturing photos but missing the moment.
            </p>
            <p className="text-lg text-stone-600 leading-relaxed">
              Our mission is to bring <strong>minimalism</strong> to Indian travel. By focusing on Junnar, Mahabaleshwar, and Ooty—places rich in culture and nature—we encourage you to slow down, breathe, and truly experience the destination.
