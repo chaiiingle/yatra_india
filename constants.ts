@@ -116,7 +116,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.SELFIE_POINT, SpotCategory.HISTORIC],
     durationHours: 1.0,
     description: 'A designated spot offering the perfect backdrop of Shivneri Fort for photos.',
-    imageUrl: 'https://media.istockphoto.com/id/1577663818/photo/27-july-2023-junnar-maharashtra-india-shivneri-fort-is-a-17th-century-military-fortification.jpg?s=1024x1024&w=is&k=20&c=ghCd4Zhm9hW7HLMo52bjvr70tpM2N-zpnZcXix46SIY=',
+    imageUrl: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgH1ZvM5aZx0kd-o1p3bB7Pi92sAxObSu9xJ6EXJa5Fczx5VgnUmTSz4B9Fx5vmx-niZUqrgCWwhqC3gu4__tGUIY2BEh1vdQG3gqfhhbS38ORINXx9Nx4YjJQAbBxUGIyZTFiS2-GaihPp9ePna9QaO6Wq95NNp9ervFKDTnGKIHQYitg0otO2cl0ZBIlA/w680/EtkWl4bVcAMgGja.jpg',
     mapQuery: 'Selfie Point Junnar Shivneri',
     intensity: 'Light'
   },
@@ -149,7 +149,7 @@ export const SPOTS_DB: TouristSpot[] = [
     categories: [SpotCategory.RELIGIOUS],
     durationHours: 0.5,
     description: 'A spiritual center and beautiful Barav (stepwell) located at the chowk.',
-    imageUrl: 'https://sl.bing.net/dsRKqOeFEfk',
+    imageUrl: 'https://i.pinimg.com/originals/88/92/1a/88921ab71f9b5cc82ca335a1f4366ecd.jpg',
     mapQuery: 'Swami Samarth Kendra Junnar',
     intensity: 'Light'
   },
