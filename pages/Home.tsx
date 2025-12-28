@@ -1,4 +1,4 @@
-iimport React, { useEffect, useState } from 'react'; // Added useEffect and useState
+import React, { useEffect, useState } from 'react'; // Added useEffect and useState
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
 import { supabase } from '../supabaseClient'; // Import Supabase instead of local data
