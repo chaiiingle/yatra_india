@@ -4,7 +4,7 @@ import { DestinationName, TimeOption, SpotCategory, ItineraryDay, User } from '.
 import { TIME_OPTIONS, CATEGORIES, DESTINATIONS_DATA } from '../constants';
 import { generateSmartItinerary, getTripEssence, generateDayEssence } from '../utils/plannerLogic';
 import SpotCard from '../components/SpotCard';
-import { Save, RefreshCw, Clock, Info, Check, ArrowLeft, Trash2 } from 'lucide-react';
+import { Save, RefreshCw, Clock, Info, Check, ArrowLeft } from 'lucide-react';
 
 interface PlannerProps {
   user: User | null;
@@ -28,7 +28,6 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
-  // Scroll to top on load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -57,14 +56,12 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
 
   const handleRemoveSpot = (dayNumber: number, spotId: string) => {
     if (!generatedPlan) return;
-
     const updatedPlan = generatedPlan.map(day => {
       if (day.dayNumber === dayNumber) {
         const newSpots = day.spots.filter(s => s.id !== spotId);
         const newTouringHours = newSpots.reduce((acc, curr) => acc + curr.durationHours, 0);
         const newBuffer = Math.max(0, 14 - newTouringHours); 
         const newEssence = generateDayEssence(newSpots);
-
         return {
           ...day,
           spots: newSpots,
@@ -75,7 +72,6 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
       }
       return day;
     });
-
     setGeneratedPlan(updatedPlan);
     setIsSaved(false);
   };
@@ -89,7 +85,6 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
       const name = `${destination} Yatra - ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`;
       onSavePlan(name, destination, timeAvailable, preferences, generatedPlan);
       setIsSaved(true);
-      // Feedback duration
       setTimeout(() => setIsSaved(false), 3000);
     }
   };
@@ -97,121 +92,90 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
   if (generatedPlan) {
     return (
       <div className="min-h-screen bg-[#FBFBF9] pb-24">
-        {/* Navigation - Offset fix */}
-        <div className="sticky top-0 z-40 bg-white/70 backdrop-blur-2xl border-b border-stone-100">
-           <div className="container mx-auto px-6 max-w-7xl h-24 flex items-center justify-between">
+        {/* Fixed Navigation Header */}
+        <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-stone-100">
+           <div className="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
               <div className="flex items-center gap-6">
                  <button 
                    onClick={() => setGeneratedPlan(null)} 
-                   className="p-3 rounded-full hover:bg-stone-100 transition-colors text-stone-500 group"
+                   className="p-3 rounded-full hover:bg-stone-100 transition-colors text-stone-500"
                  >
-                   <ArrowLeft size={20} className="transition-transform group-hover:-translate-x-1" />
+                   <ArrowLeft size={20} />
                  </button>
                  <div>
-                    <h2 className="text-2xl font-serif font-bold text-stone-900 leading-none">{destination}</h2>
-                    <span className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.2em] mt-2 block">{timeAvailable} Curation</span>
+                    <h2 className="text-xl font-serif font-bold text-stone-900">{destination}</h2>
+                    <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest block">{timeAvailable} Plan</span>
                  </div>
               </div>
            </div>
         </div>
 
-        <div className="container mx-auto px-6 max-w-7xl pt-16">
-          {/* Header Essence */}
-          <div className="mb-24 text-center max-w-2xl mx-auto">
-            <p className="text-3xl md:text-5xl font-serif text-stone-800 leading-[1.2] italic font-light">
+        <div className="container mx-auto px-6 max-w-7xl pt-20">
+          {/* Header Essence & Action Buttons */}
+          <div className="mb-24 text-center max-w-3xl mx-auto flex flex-col items-center">
+            <h1 className="text-3xl md:text-5xl font-serif text-stone-800 leading-[1.3] italic font-light mb-12">
               "{planEssence}"
-            </p>
+            </h1>
+            
+            <div className="flex flex-wrap justify-center gap-4">
+              <button 
+                onClick={handleSave}
+                disabled={isSaved}
+                className={`px-10 py-4 rounded-full text-white font-bold shadow-xl transition-all flex items-center gap-3 ${
+                  isSaved ? 'bg-emerald-600 scale-105' : 'bg-stone-900 hover:bg-stone-800 active:scale-95'
+                }`}
+              >
+                {isSaved ? <><Check size={20} /> Saved</> : <><Save size={20} /> Save Yatra</>}
+              </button>
+
+              <button 
+                onClick={() => setGeneratedPlan(null)} 
+                className="px-10 py-4 rounded-full bg-white text-stone-900 border border-stone-200 font-bold shadow-md hover:bg-stone-50 transition-all flex items-center gap-3 active:scale-95"
+              >
+                <RefreshCw size={20} />
+                Redesign
+              </button>
+            </div>
           </div>
-<div className="flex flex-wrap justify-center gap-4">
-    <button 
-      onClick={handleSave}
-      disabled={isSaved}
-      className={`px-10 py-4 rounded-full text-white font-bold shadow-xl transition-all flex items-center gap-3 ${
-        isSaved ? 'bg-emerald-600' : 'bg-stone-900 hover:bg-stone-800'
-      }`}
-    >
-      {isSaved ? <><Check size={20} /> Plan Saved</> : <><Save size={20} /> Save Yatra</>}
-    </button>
 
-    <button 
- onClick={() => setGeneratedPlan(null)} 
-      className="px-10 py-4 rounded-full bg-white text-stone-900 border border-stone-200 font-bold shadow-md hover:bg-stone-50 transition-all flex items-center gap-3"
-    >
-      <RefreshCcw size={20} />
-      Redesign
-    </button>
-  </div>
-</div>
-          <div className="space-y-32">
+          {/* Itinerary Phases */}
+          <div className="space-y-24">
             {generatedPlan.map((day) => (
-              <div key={day.dayNumber} className="relative group">
-                {/* Timeline Visual */}
-                <div className="absolute left-1/2 -top-16 bottom-0 w-px bg-stone-100 hidden xl:block" />
-
-                <div className="bg-white rounded-[3rem] shadow-[0_40px_100px_-30px_rgba(0,0,0,0.04)] border border-stone-100/60 overflow-hidden">
-                   
-                  {/* Day Header - Sticky Offset Fix (top-24 accounts for navbar) */}
-                  <div className="sticky top-24 z-30 bg-white/95 backdrop-blur-xl border-b border-stone-50/50 px-10 py-10 md:px-16 md:py-12 flex flex-col md:flex-row md:items-center justify-between gap-8">
-                    <div className="max-w-xl">
-                        <div className="flex items-center gap-3 mb-4">
-                           <span className="px-3 py-1 bg-stone-100 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-stone-400">Phase 0{day.dayNumber}</span>
-                        </div>
-                        <h3 className="text-3xl md:text-4xl font-serif font-bold text-stone-900 leading-tight">
-                            {day.essence}
-                        </h3>
-                    </div>
-                    
-                    {day.spots.length > 0 && (
-                    <div className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 shrink-0 bg-stone-50/50 px-8 py-4 rounded-full border border-stone-100/50">
-                        <div className="flex items-center gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-stone-900" />
-                            {day.totalTouringHours}h Motion
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <span className="w-1.5 h-1.5 rounded-full bg-stone-200" />
-                            {day.bufferHours}h Stillness
-                        </div>
-                    </div>
-                    )}
+              <div key={day.dayNumber} className="bg-white rounded-[3rem] shadow-sm border border-stone-100 overflow-hidden">
+                {/* Day Info Bar */}
+                <div className="bg-stone-50/50 px-10 py-8 border-b border-stone-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                  <div>
+                    <span className="px-3 py-1 bg-white rounded-full text-[10px] font-black uppercase tracking-widest text-stone-400 border border-stone-100 mb-3 inline-block">Phase 0{day.dayNumber}</span>
+                    <h3 className="text-2xl font-serif font-bold text-stone-900">{day.essence}</h3>
                   </div>
+                  <div className="flex gap-6 text-[10px] font-bold uppercase tracking-widest text-stone-400">
+                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-stone-900"/> {day.totalTouringHours}h Motion</div>
+                    <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-stone-200"/> {day.bufferHours}h Stillness</div>
+                  </div>
+                </div>
 
-                  {/* Spots Grid */}
-                  <div className="p-10 md:p-16">
-                    {day.spots.length > 0 ? (
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        {day.spots.map((spot, idx) => (
-                          <div key={spot.id} className="relative">
-                            <div className="absolute -top-3 -left-3 z-20 w-8 h-8 bg-stone-900 text-white rounded-full flex items-center justify-center font-serif font-bold text-xs shadow-xl">
-                              {idx + 1}
-                            </div>
-                            <SpotCard 
-                              spot={spot} 
-                              isFavorite={user?.favorites.includes(spot.id)}
-                              onToggleFavorite={onToggleFavorite}
-                              onRemove={() => handleRemoveSpot(day.dayNumber, spot.id)}
-                            />
+                <div className="p-10 md:p-16">
+                  {day.spots.length > 0 ? (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                      {day.spots.map((spot, idx) => (
+                        <div key={spot.id} className="relative">
+                          <div className="absolute -top-3 -left-3 z-20 w-8 h-8 bg-stone-900 text-white rounded-full flex items-center justify-center font-bold text-xs shadow-lg">
+                            {idx + 1}
                           </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="text-center py-24 bg-stone-50/30 rounded-[2rem] border border-dashed border-stone-100">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-sm">
-                            <Clock className="text-stone-300" size={24} />
+                          <SpotCard 
+                            spot={spot} 
+                            isFavorite={user?.favorites.includes(spot.id)}
+                            onToggleFavorite={onToggleFavorite}
+                            onRemove={() => handleRemoveSpot(day.dayNumber, spot.id)}
+                          />
                         </div>
-                        <h4 className="font-serif font-bold text-2xl text-stone-800 mb-4">Chill Day</h4>
-                        <p className="text-stone-400 max-w-sm mx-auto leading-relaxed text-sm font-light">
-                          You've seen the best of the best! Use your remaining time to revisit a favorite spot or simply relax
-                        </p>
-                      </div>
-                    )}
-
-                    {day.spots.length > 0 && (
-                       <div className="mt-16 flex items-center justify-center gap-4 text-stone-400 text-sm font-light italic">
-                          <Info size={16} className="opacity-50" />
-                          <span>Approximately {day.bufferHours} hours of unscripted time remains.</span>
-                       </div>
-                    )}
-                  </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-20 bg-stone-50/30 rounded-3xl border border-dashed border-stone-200">
+                      <p className="text-stone-400">No spots selected for this phase.</p>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -223,27 +187,25 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
 
   return (
     <div className="min-h-screen pt-40 pb-24 bg-[#FBFBF9] flex flex-col items-center px-6">
-      <div className="w-full max-w-2xl animate-fade-in-up">
-        <div className="text-center mb-20">
-          <span className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.4em] mb-6 block">The Intelligent Compass</span>
-          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-8 text-stone-900 tracking-tight leading-none">Design Your Yatra</h1>
-          <p className="text-lg text-stone-500 font-light max-w-md mx-auto leading-relaxed">Artfully crafted itineraries that prioritize your peace over the checklist.</p>
+      <div className="w-full max-w-2xl">
+        <div className="text-center mb-16">
+          <span className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.4em] mb-4 block">The Intelligent Compass</span>
+          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 text-stone-900">Design Your Yatra</h1>
+          <p className="text-stone-500 font-light">Artfully crafted itineraries that prioritize your peace.</p>
         </div>
 
-        <div className="bg-white rounded-[3rem] shadow-[0_60px_120px_-20px_rgba(0,0,0,0.06)] p-10 md:p-16 border border-stone-100/50">
+        <div className="bg-white rounded-[3rem] shadow-xl p-10 md:p-16 border border-stone-100">
           <div className="space-y-12">
-            {/* Destination */}
+            {/* Destination Selection */}
             <div>
-              <label className="block text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-6">Where would you like to be?</label>
+              <label className="block text-[10px] font-black text-stone-400 uppercase tracking-widest mb-6">Where to?</label>
               <div className="grid grid-cols-3 gap-4">
                 {(Object.keys(DESTINATIONS_DATA) as DestinationName[]).map((dest) => (
                   <button
                     key={dest}
                     onClick={() => setDestination(dest)}
-                    className={`py-5 px-2 rounded-2xl border transition-all duration-500 text-sm font-bold ${
-                      destination === dest 
-                        ? 'border-stone-900 bg-stone-900 text-white shadow-2xl scale-[1.02]' 
-                        : 'border-stone-100 bg-stone-50/50 text-stone-500 hover:border-stone-200 hover:bg-white'
+                    className={`py-4 rounded-2xl border text-sm font-bold transition-all ${
+                      destination === dest ? 'bg-stone-900 border-stone-900 text-white shadow-lg scale-105' : 'bg-stone-50 border-stone-100 text-stone-500 hover:bg-white'
                     }`}
                   >
                     {dest}
@@ -252,35 +214,28 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
               </div>
             </div>
 
-            {/* Time */}
+            {/* Time Selection */}
             <div>
-              <label className="block text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-6">Duration of presence</label>
-              <div className="relative">
-                <select
-                  value={timeAvailable}
-                  onChange={(e) => setTimeAvailable(e.target.value as TimeOption)}
-                  className="w-full p-5 rounded-2xl border border-stone-100 bg-stone-50/50 text-stone-800 focus:bg-white focus:ring-4 focus:ring-stone-900/5 focus:border-stone-900 outline-none appearance-none font-bold cursor-pointer transition-all"
-                >
-                  {TIME_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                </select>
-                <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-stone-300">
-                    <Clock size={18} />
-                </div>
-              </div>
+              <label className="block text-[10px] font-black text-stone-400 uppercase tracking-widest mb-6">Duration</label>
+              <select
+                value={timeAvailable}
+                onChange={(e) => setTimeAvailable(e.target.value as TimeOption)}
+                className="w-full p-5 rounded-2xl border border-stone-100 bg-stone-50 text-stone-800 outline-none font-bold"
+              >
+                {TIME_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+              </select>
             </div>
 
-            {/* Preferences */}
+            {/* Preference Chips */}
             <div>
-              <label className="block text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-6">Elements of interest</label>
-              <div className="flex flex-wrap gap-3">
+              <label className="block text-[10px] font-black text-stone-400 uppercase tracking-widest mb-6">Interests</label>
+              <div className="flex flex-wrap gap-2">
                 {CATEGORIES.map(cat => (
                   <button
                     key={cat}
                     onClick={() => handleTogglePref(cat)}
-                    className={`px-6 py-3 rounded-full text-[11px] font-bold border transition-all duration-500 tracking-wider uppercase ${
-                      preferences.includes(cat)
-                        ? 'bg-stone-900 border-stone-900 text-white shadow-lg'
-                        : 'bg-white border-stone-100 text-stone-400 hover:border-stone-300 hover:text-stone-600'
+                    className={`px-5 py-2 rounded-full text-[11px] font-bold border transition-all ${
+                      preferences.includes(cat) ? 'bg-stone-900 text-white border-stone-900' : 'bg-white text-stone-400 border-stone-100'
                     }`}
                   >
                     {cat}
@@ -292,17 +247,11 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
             <button
               onClick={handleGenerate}
               disabled={!destination || isGenerating}
-              className={`w-full py-6 rounded-[2rem] font-bold text-lg shadow-2xl transition-all duration-700 transform hover:-translate-y-1 active:scale-95 ${
-                !destination 
-                  ? 'bg-stone-50 text-stone-200 cursor-not-allowed border border-stone-100' 
-                  : 'bg-stone-900 text-white hover:bg-stone-800 hover:shadow-stone-900/20'
+              className={`w-full py-6 rounded-3xl font-bold text-lg transition-all ${
+                !destination ? 'bg-stone-100 text-stone-300' : 'bg-stone-900 text-white shadow-2xl hover:bg-stone-800'
               }`}
             >
-              {isGenerating ? (
-                  <span className="flex items-center justify-center gap-3">
-                      <RefreshCw className="animate-spin" size={20} /> Crafting...
-                  </span>
-              ) : 'Manifest Itinerary'}
+              {isGenerating ? 'Crafting...' : 'Manifest Itinerary'}
             </button>
           </div>
         </div>
