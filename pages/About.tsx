@@ -61,6 +61,62 @@ const About: React.FC = () => {
         </div>
       </div>
     </div>
+
+    import React from 'react';
+import { Linkedin, Github, ExternalLink } from 'lucide-react';
+
+const TeamSection = () => {
+  const team = [
+    { name: "Chaitali Ingle", role: "Lead Developer & Visionary", linkedin: "www.linkedin.com/in/chaitali-ingle-b43a94351" },
+    { name: "Srushti Hande", role: "Lead Developer & Visionary", linkedin: "https://www.linkedin.com/in/srushti-hande-6b02993a2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+    { name: "Sanjana Hodage", role: "Team Member", linkedin: "https://www.linkedin.com/in/sanjana-hodage-082946367?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+    { name: "Nikita Jadhav", role: "Team Member", linkedin: "https://www.linkedin.com/in/nikita-jadhav-6412993a3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
+    { name: "Akhilesh Patil", role: "Team Member", linkedin: "https://www.linkedin.com/in/akhilesh-gondepatil-03b9b43a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_appE" },
+  ];
+
+  return (
+    <section className="py-24 bg-white">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="text-center mb-20">
+          <span className="text-stone-400 uppercase tracking-[0.3em] text-xs font-bold">The Faces Behind the Journey</span>
+          <h2 className="text-5xl font-serif font-bold mt-4 text-stone-900">Our Team</h2>
+          <div className="w-20 h-1 bg-stone-900 mx-auto mt-8 opacity-10"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {team.map((member, index) => (
+            <div key={index} className="group relative p-10 rounded-[2.5rem] bg-[#FBFBF9] border border-stone-100 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
+              <div className="flex flex-col h-full">
+                <div className="mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-stone-900 flex items-center justify-center text-white mb-6">
+                    <span className="text-2xl font-serif">{member.name.charAt(0)}</span>
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-stone-900 mb-1">{member.name}</h3>
+                  <p className="text-stone-400 text-sm uppercase tracking-widest font-medium">{member.role}</p>
+                </div>
+                
+                <div className="mt-auto pt-6 border-t border-stone-100 flex items-center justify-between">
+                  <a 
+                    href={member.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-stone-600 hover:text-stone-900 transition-colors font-medium text-sm"
+                  >
+                    <Linkedin size={18} />
+                    LinkedIn
+                  </a>
+                  <ExternalLink size={14} className="text-stone-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default TeamSection;
   );
 };
 
