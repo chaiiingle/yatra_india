@@ -11,6 +11,8 @@ interface DestinationProps {
   onToggleFavorite: (id: string) => void;
 }
 
+
+
 const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => {
   const { name } = useParams<{ name: string }>();
   const [filterCategory, setFilterCategory] = useState<SpotCategory | 'All'>('All');
@@ -21,39 +23,46 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
   const [loading, setLoading] = useState(true);
 
   // 1. Fetch Data from Supabase
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const normalizedName = name?.toUpperCase();
+ useEffect(() => {
+  const fetchData = async () => {
+    if (!name) return;
+    
+    setLoading(true);
+    const normalizedName = name.toUpperCase();
 
-      // Fetch City Details from 'cities' table
-      const { data: cityData } = await supabase
-        .from('city') 
-        .select('*')
-        .eq('name', normalizedName)
-        .single();
+    try {
+      // Run both queries in parallel
+      const [cityResponse, spotsResponse] = await Promise.all([
+        supabase.from('city').select('*').eq('name', normalizedName).single(),
+        supabase.from('destinations').select('*').eq('city', normalizedName)
+      ]);
 
-      // Fetch Spots from 'destination' table
-      const { data: spotsData } = await supabase
-        .from('destinations') 
-        .select('*')
-        .eq('city', normalizedName);
+      // Handle City Data
+      if (cityResponse.error) throw cityResponse.error;
+      setDestData(cityResponse.data);
 
-      if (cityData) setDestData(cityData);
+      // Handle Spots Data
+      if (spotsResponse.error) throw spotsResponse.error;
       
-      if (spotsData) {
-        const formatted = spotsData.map(s => ({
-          ...s,
-          // Ensure categories are handled as an array for filtering
-          categories: typeof s.categories === 'string' ? s.categories.split(';') : (s.categories || [])
-        }));
-        setSpots(formatted);
-      }
-      setLoading(false);
-    };
+      const formatted = spotsResponse.data.map(s => ({
+        ...s,
+        categories: typeof s.categories === 'string' 
+          ? s.categories.split(';').map(cat => cat.trim()) // trim whitespace
+          : (s.categories || [])
+      }));
+      
+      setSpots(formatted);
 
-    if (name) fetchData();
-  }, [name]);
+    } catch (error) {
+      console.error("Error fetching city data:", error.message);
+      // Optional: setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, [name]);
 
   // 2. Dynamic Theme Styling using 'themeColor' from cities table
   const themeClasses = useMemo(() => {
