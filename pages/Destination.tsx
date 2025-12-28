@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { DestinationName, SpotCategory, User } from '../types';
+import { SpotCategory, User } from '../types';
 import { supabase } from '../supabaseClient'; 
 import { CATEGORIES } from '../constants'; 
 import SpotCard from '../components/SpotCard';
@@ -26,14 +26,14 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
       setLoading(true);
       const normalizedName = name?.toUpperCase();
 
-      // Fetch City Details
+      // Fetch City Details from 'cities' table
       const { data: cityData } = await supabase
-        .from('city')
+        .from('cities') 
         .select('*')
         .eq('name', normalizedName)
         .single();
 
-      // Fetch Spots
+      // Fetch Spots from 'destination' table
       const { data: spotsData } = await supabase
         .from('destination') 
         .select('*')
@@ -44,7 +44,8 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
       if (spotsData) {
         const formatted = spotsData.map(s => ({
           ...s,
-          categories: typeof s.categories === 'string' ? s.categories.split(';') : s.categories
+          // Ensure categories are handled as an array for filtering
+          categories: typeof s.categories === 'string' ? s.categories.split(';') : (s.categories || [])
         }));
         setSpots(formatted);
       }
@@ -54,10 +55,11 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
     if (name) fetchData();
   }, [name]);
 
-  // 2. Dynamic Theme Styling (Now using destData from DB)
+  // 2. Dynamic Theme Styling using 'themeColor' from cities table
   const themeClasses = useMemo(() => {
     if (!destData) return 'bg-[#FBFBF9]';
-    // You can now use destData.themeColor if you added that column!
+    if (destData.themeColor) return `${destData.themeColor} text-stone-800`; // Use DB color if exists
+    
     switch (destData.name) {
       case 'JUNNAR': return 'bg-orange-50/50 text-stone-800';
       case 'MAHABALESHWAR': return 'bg-green-50/50 text-stone-800';
@@ -84,7 +86,7 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
   // 4. Loading & Error States
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center bg-[#FBFBF9]">
-      <div className="text-xl font-serif animate-pulse text-stone-400">Loading your destination...</div>
+      <div className="text-xl font-serif animate-pulse text-stone-400">Loading {name}...</div>
     </div>
   );
   
@@ -92,7 +94,7 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
 
   return (
     <div className={`min-h-screen ${themeClasses}`}>
-      {/* Header */}
+      {/* Header - Uses 'heroImage' from cities table */}
       <div className="relative h-[60vh]">
         <img 
           src={destData.heroImage} 
@@ -104,7 +106,7 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
             {destData.name}
           </h1>
           <p className="text-xl text-white/90 max-w-2xl font-light leading-relaxed">
-            {destData.description}
+            {destData.tagline}
           </p>
         </div>
       </div>
@@ -157,7 +159,7 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
           ))}
         </div>
 
-        {/* Grid */}
+        {/* Grid - Uses 'imageUrl' from destination table */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredSpots.map(spot => (
             <div key={spot.id} className="h-full">
