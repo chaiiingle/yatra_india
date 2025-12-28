@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouristSpot } from '../types';
-import { Clock, Navigation, Heart, Trash2 } from 'lucide-react';
+import { Clock, Navigation, Heart, Trash2, Zap } from 'lucide-react';
 
 interface SpotCardProps {
-  spot: TouristSpot;
+  spot: any; // Using any to match your Supabase dynamic data
   minimal?: boolean;
   isFavorite?: boolean;
   onToggleFavorite?: (id: string) => void;
@@ -22,9 +22,16 @@ const SpotCard: React.FC<SpotCardProps> = ({ spot, minimal = false, isFavorite =
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 via-transparent to-transparent opacity-60" />
         
-        {/* Categories Float */}
+        {/* Categories & Intensity Float */}
         <div className="absolute top-5 left-5 flex flex-wrap gap-2 max-w-[80%]">
-           {spot.categories.slice(0, 2).map((cat, idx) => (
+           {/* Intensity Badge - Added this from your DB column */}
+           {spot.intensity && (
+             <span className="bg-stone-900 text-white px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.15em] flex items-center gap-1 shadow-lg">
+               <Zap size={10} fill="currentColor" /> {spot.intensity}
+             </span>
+           )}
+           
+           {spot.categories?.slice(0, 2).map((cat: string, idx: number) => (
              <span key={idx} className="bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-stone-800 shadow-sm">
                {cat}
              </span>
@@ -32,7 +39,6 @@ const SpotCard: React.FC<SpotCardProps> = ({ spot, minimal = false, isFavorite =
         </div>
 
         <div className="absolute top-5 right-5 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-2 group-hover:translate-x-0">
-            {/* Remove Button (If in Edit Mode) */}
             {onRemove && (
             <button 
                 onClick={(e) => {
@@ -47,7 +53,6 @@ const SpotCard: React.FC<SpotCardProps> = ({ spot, minimal = false, isFavorite =
             </button>
             )}
 
-            {/* Favorite Button */}
             {onToggleFavorite && (
             <button 
                 onClick={(e) => {
@@ -81,11 +86,13 @@ const SpotCard: React.FC<SpotCardProps> = ({ spot, minimal = false, isFavorite =
         <div className="flex items-center justify-between mt-auto pt-5 border-t border-stone-50">
           <div className="flex items-center gap-2 text-stone-400">
              <Clock size={14} className="opacity-70" />
-             <span className="text-[10px] font-bold tracking-widest uppercase">{spot.durationHours}h Session</span>
+             <span className="text-[10px] font-bold tracking-widest uppercase">
+               {spot.durationHours || '2'}h Session
+             </span>
           </div>
           
           <a 
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.mapQuery)}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.mapQuery || spot.name)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-stone-900 hover:opacity-60 transition-opacity text-[10px] font-bold uppercase tracking-widest"
