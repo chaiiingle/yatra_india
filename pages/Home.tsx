@@ -48,30 +48,30 @@ const Home: React.FC = () => {
                 View all locations <ArrowRight size={16} />
             </Link>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-10">
-            {destinations.map((destinations) => (
-              <Link to={`/${destinations.name.toLowerCase()}`} key={destinations.id} className="group cursor-pointer block h-full">
-                <div className="relative overflow-hidden rounded-[2.5rem] aspect-[3/4] shadow-2xl shadow-stone-200 transition-all duration-700 hover:-translate-y-2">
-                  <img 
-                    src={destinations.imageUrl} 
-                    alt={destinations.name} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
-                  
-                  <div className="absolute bottom-0 left-0 p-10 w-full">
-                    <h3 className="text-4xl font-serif font-bold text-white mb-3">{destinations.name}</h3>
-                    <p className="text-white/80 text-sm mb-6 line-clamp-2 font-light leading-relaxed">{destinations.description}</p>
-                    
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white group-hover:bg-white group-hover:text-stone-900 transition-all duration-300">
-                      <ArrowRight size={20} />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+<div className="grid md:grid-cols-3 gap-10">
+  {destinations.map((city) => (
+    /* Use city.name as the key since there is no ID column */
+    <Link to={`/${city.name.toLowerCase()}`} key={city.name} className="group cursor-pointer block h-full">
+      <div className="relative overflow-hidden rounded-[2.5rem] aspect-[3/4] shadow-2xl shadow-stone-200 transition-all duration-700 hover:-translate-y-2">
+        <img 
+          src={city.heroImage} // Cities table uses 'heroImage'
+          alt={city.name} 
+          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+        
+        <div className="absolute bottom-0 left-0 p-10 w-full">
+          <h3 className="text-4xl font-serif font-bold text-white mb-3">{city.name}</h3>
+          <p className="text-white/80 text-sm mb-6 line-clamp-2 font-light leading-relaxed">{city.tagline}</p>
+          
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white group-hover:bg-white group-hover:text-stone-900 transition-all duration-300">
+            <ArrowRight size={20} />
           </div>
+        </div>
+      </div>
+    </Link>
+  ))}
+</div>
         </div>
       </section>
 
