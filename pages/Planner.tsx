@@ -112,27 +112,6 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
                     <span className="text-[10px] font-bold text-stone-400 uppercase tracking-[0.2em] mt-2 block">{timeAvailable} Curation</span>
                  </div>
               </div>
-
-             <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] w-full max-w-md px-6">
-  <div className="bg-white/90 backdrop-blur-xl border border-stone-200 p-3 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex items-center justify-center gap-3">
-    <button 
-      onClick={handleSave}
-      disabled={isSaved}
-      className={`flex-1 px-8 py-3 rounded-2xl text-white font-bold text-sm transition-all flex items-center justify-center gap-2 ${
-        isSaved ? 'bg-emerald-600' : 'bg-stone-900 hover:bg-stone-800'
-      }`}
-    >
-      {isSaved ? <><Check size={18} /> Saved</> : <><Save size={18} /> Save Yatra</>}
-    </button>
-
-    <button 
-    onClick={() => setGeneratedPlan(null)} 
-      className="px-8 py-3 rounded-2xl bg-white text-stone-900 border border-stone-200 font-bold text-sm hover:bg-stone-50 transition-all shadow-sm"
-    >
-      Redesign
-    </button>
-  </div>
-</div>
            </div>
         </div>
 
@@ -143,7 +122,26 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
               "{planEssence}"
             </p>
           </div>
+<div className="flex flex-wrap justify-center gap-4">
+    <button 
+      onClick={handleSave}
+      disabled={isSaved}
+      className={`px-10 py-4 rounded-full text-white font-bold shadow-xl transition-all flex items-center gap-3 ${
+        isSaved ? 'bg-emerald-600' : 'bg-stone-900 hover:bg-stone-800'
+      }`}
+    >
+      {isSaved ? <><Check size={20} /> Plan Saved</> : <><Save size={20} /> Save Yatra</>}
+    </button>
 
+    <button 
+ onClick={() => setGeneratedPlan(null)} 
+      className="px-10 py-4 rounded-full bg-white text-stone-900 border border-stone-200 font-bold shadow-md hover:bg-stone-50 transition-all flex items-center gap-3"
+    >
+      <RefreshCcw size={20} />
+      Redesign
+    </button>
+  </div>
+</div>
           <div className="space-y-32">
             {generatedPlan.map((day) => (
               <div key={day.dayNumber} className="relative group">
@@ -200,9 +198,9 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
                         <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-sm">
                             <Clock className="text-stone-300" size={24} />
                         </div>
-                        <h4 className="font-serif font-bold text-2xl text-stone-800 mb-4">A Day for Nothing</h4>
+                        <h4 className="font-serif font-bold text-2xl text-stone-800 mb-4">Chill Day</h4>
                         <p className="text-stone-400 max-w-sm mx-auto leading-relaxed text-sm font-light">
-                          Sometimes the best part of a journey is the space between destinations. Use today to wander without a map.
+                          You've seen the best of the best! Use your remaining time to revisit a favorite spot or simply relax
                         </p>
                       </div>
                     )}
