@@ -116,19 +116,27 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
               <div className="flex gap-4">
                  <button 
                   onClick={() => setGeneratedPlan(null)} 
-                  className="hidden md:flex px-6 py-3 rounded-full border border-stone-200 text-stone-600 font-medium text-sm hover:bg-stone-50 transition-all items-center gap-2"
-                >
+                 className="px-8 py-3 rounded-full bg-white text-stone-900 border border-stone-200 font-bold text-sm transition-all hover:bg-stone-50 active:scale-95 shadow-sm whitespace-nowrap"
+    >
                   <RefreshCw size={14} /> Redesign
                 </button>
-                <button 
-                  onClick={handleSave}
-                  disabled={isSaved}
-                  className={`px-8 py-3 rounded-full text-white font-bold text-sm transition-all shadow-2xl flex items-center gap-3 ${
-                    isSaved ? 'bg-emerald-600 scale-105' : 'bg-stone-900 hover:bg-stone-800 hover:scale-[1.02]'
-                  }`}
-                >
-                  {isSaved ? <><Check size={18} /> Plan Saved</> : <><Save size={18} /> Save Yatra</>}
-                </button>
+               <button
+      onClick={handleSave}
+      disabled={isSaved}
+      className={`px-8 py-3 rounded-full text-white font-bold text-sm transition-all shadow-lg flex items-center gap-3 whitespace-nowrap ${
+        isSaved ? 'bg-emerald-600' : 'bg-stone-900 hover:bg-stone-800 active:scale-95'
+      }`}
+    >
+      {isSaved ? (
+        <>
+          <Check size={18} /> Plan Saved
+        </>
+      ) : (
+        <>
+          <Save size={18} /> Save Yatra
+        </>
+      )}
+    </button>
               </div>
            </div>
         </div>
