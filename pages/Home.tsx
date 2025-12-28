@@ -12,7 +12,7 @@ const Home: React.FC = () => {
     const fetchCities = async () => {
       setLoading(true);
       const { data, error } = await supabase
-        .from('cities') // PULLING FROM CITIES TABLE
+        .from('city') // PULLING FROM CITIES TABLE
         .select('*');
       
       if (!error && data) {
