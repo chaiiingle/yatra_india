@@ -113,7 +113,7 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
                  </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="pt-32">
                  <button 
                   onClick={() => setGeneratedPlan(null)} 
                 className="px-6 py-3 rounded-xl bg-white text-stone-900 border border-stone-200 font-bold hover:bg-stone-50 transition-all"
