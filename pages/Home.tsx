@@ -1,10 +1,33 @@
-import React from 'react';
+iimport React, { useEffect, useState } from 'react'; // Added useEffect and useState
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star } from 'lucide-react';
-import { DestinationName } from '../types';
-import { DESTINATIONS_DATA } from '../constants';
+import { supabase } from '../supabaseClient'; // Import Supabase instead of local data
 
 const Home: React.FC = () => {
+  const [destinations, setDestinations] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('city') // Make sure your table is named 'city'
+        .select('*');
+      
+      if (!error && data) {
+        setDestinations(data);
+      }
+      setLoading(false);
+    };
+    fetchDestinations();
+  }, []);
+
+  if (loading) return (
+    <div className="h-screen flex items-center justify-center bg-[#FBFBF9]">
+      <div className="text-xl font-serif animate-pulse">Loading Destinations...</div>
+    </div>
+  );
+
   return (
     <div className="flex flex-col bg-[#FBFBF9]">
       {/* Hero */}
@@ -38,6 +61,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* Destinations Preview */}
+     {/* Destinations Preview - UPDATED SECTION */}
       <section className="py-32 bg-white">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
@@ -51,34 +75,30 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-10">
-            {(Object.keys(DESTINATIONS_DATA) as DestinationName[]).map((destName) => {
-              const dest = DESTINATIONS_DATA[destName];
-              return (
-                <Link to={`/${destName.toLowerCase()}`} key={destName} className="group cursor-pointer block h-full">
-                  <div className="relative overflow-hidden rounded-[2.5rem] aspect-[3/4] shadow-2xl shadow-stone-200 transition-all duration-700 hover:-translate-y-2">
-                    <img 
-                      src={dest.heroImage} 
-                      alt={destName} 
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+            {destinations.map((dest) => (
+              <Link to={`/${dest.name.toLowerCase()}`} key={dest.id} className="group cursor-pointer block h-full">
+                <div className="relative overflow-hidden rounded-[2.5rem] aspect-[3/4] shadow-2xl shadow-stone-200 transition-all duration-700 hover:-translate-y-2">
+                  <img 
+                    src={dest.heroImage} 
+                    alt={dest.name} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+                  
+                  <div className="absolute bottom-0 left-0 p-10 w-full">
+                    <h3 className="text-4xl font-serif font-bold text-white mb-3">{dest.name}</h3>
+                    <p className="text-white/80 text-sm mb-6 line-clamp-2 font-light leading-relaxed">{dest.tagline}</p>
                     
-                    <div className="absolute bottom-0 left-0 p-10 w-full">
-                      <h3 className="text-4xl font-serif font-bold text-white mb-3">{destName}</h3>
-                      <p className="text-white/80 text-sm mb-6 line-clamp-2 font-light leading-relaxed">{dest.tagline}</p>
-                      
-                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white group-hover:bg-white group-hover:text-stone-900 transition-all duration-300">
-                        <ArrowRight size={20} />
-                      </div>
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white group-hover:bg-white group-hover:text-stone-900 transition-all duration-300">
+                      <ArrowRight size={20} />
                     </div>
                   </div>
-                </Link>
-              );
-            })}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
-
       {/* Quick Feature Highlight */}
       <section className="py-32 bg-[#FBFBF9]">
         <div className="container mx-auto px-6 max-w-7xl grid md:grid-cols-2 gap-20 items-center">
