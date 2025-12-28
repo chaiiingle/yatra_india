@@ -113,23 +113,26 @@ const Planner: React.FC<PlannerProps> = ({ user, onSavePlan, onOpenAuth, onToggl
                  </div>
               </div>
 
-              <div className="pt-32">
-                 <button 
-                  onClick={() => setGeneratedPlan(null)} 
-                className="px-6 py-3 rounded-xl bg-white text-stone-900 border border-stone-200 font-bold hover:bg-stone-50 transition-all"
-    >
-                  <RefreshCw size={14} /> Redesign
-                </button>
-               <button
+             <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] w-full max-w-md px-6">
+  <div className="bg-white/90 backdrop-blur-xl border border-stone-200 p-3 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] flex items-center justify-center gap-3">
+    <button 
       onClick={handleSave}
       disabled={isSaved}
-    className={`flex-1 px-6 py-3 rounded-xl text-white font-bold transition-all flex items-center justify-center gap-2 ${
+      className={`flex-1 px-8 py-3 rounded-2xl text-white font-bold text-sm transition-all flex items-center justify-center gap-2 ${
         isSaved ? 'bg-emerald-600' : 'bg-stone-900 hover:bg-stone-800'
       }`}
     >
       {isSaved ? <><Check size={18} /> Saved</> : <><Save size={18} /> Save Yatra</>}
     </button>
-              </div>
+
+    <button 
+    onClick={() => setGeneratedPlan(null)} 
+      className="px-8 py-3 rounded-2xl bg-white text-stone-900 border border-stone-200 font-bold text-sm hover:bg-stone-50 transition-all shadow-sm"
+    >
+      Redesign
+    </button>
+  </div>
+</div>
            </div>
         </div>
 
