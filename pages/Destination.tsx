@@ -28,14 +28,14 @@ const Destination: React.FC<DestinationProps> = ({ user, onToggleFavorite }) => 
 
       // Fetch City Details from 'cities' table
       const { data: cityData } = await supabase
-        .from('cities') 
+        .from('city') 
         .select('*')
         .eq('name', normalizedName)
         .single();
 
       // Fetch Spots from 'destination' table
       const { data: spotsData } = await supabase
-        .from('destination') 
+        .from('destinations') 
         .select('*')
         .eq('city', normalizedName);
 
