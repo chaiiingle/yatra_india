@@ -114,11 +114,11 @@ const Home: React.FC = () => {
                </div>
                <div className="flex items-center justify-between mb-10 border-b border-stone-100 pb-6">
                   <span className="text-stone-400 text-sm font-medium tracking-wide uppercase">Active Touring</span>
-                  <span className="font-serif font-bold text-2xl text-green-700">8 Hours</span>
+                  <span className="font-serif font-bold text-2xl text-green-700">9 Hours</span>
                </div>
                <div className="flex items-center justify-between">
-                  <span className="text-stone-400 text-sm font-medium tracking-wide uppercase">Buffer (Relax)</span>
-                  <span className="font-serif font-bold text-2xl text-orange-600">4 Hours</span>
+                  <span className="text-stone-400 text-sm font-medium tracking-wide uppercase">Buffer</span>
+                  <span className="font-serif font-bold text-2xl text-orange-600">3 Hours</span>
                </div>
                
                <div className="mt-12 inline-flex self-center px-6 py-2 bg-stone-900 text-white rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
@@ -133,7 +133,7 @@ const Home: React.FC = () => {
           <div className="order-1 md:order-2">
             <h2 className="text-5xl md:text-6xl font-serif font-bold mb-8 text-stone-900 leading-tight">Not just a schedule,<br />but a rhythm.</h2>
             <p className="text-stone-500 text-xl mb-12 leading-relaxed font-light max-w-lg">
-              Most planners cram your day. We respect your time, and energy. Our Smart Planner keeps in mind your energy and buffer time for travel, chai breaks, and spontaneous discoveries.
+              Most planners cram your day. We respect your time, and energy. Our Smart Planner keeps in mind that you enjoy the moments by not draining your energy, and including buffer time for travel, chai breaks, and spontaneous discoveries.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <div className="flex items-start gap-4">
