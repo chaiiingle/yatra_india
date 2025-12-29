@@ -6,7 +6,7 @@ const TeamSection = () => {
     { name: "Chaitali Ingle", role: "Lead Developer & Visionary", linkedin: "https://www.linkedin.com/in/chaitali-ingle-b43a94351" },
     { name: "Srushti Hande", role: "Lead Developer & Visionary", linkedin: "https://www.linkedin.com/in/srushti-hande-6b02993a2" },
     { name: "Sanjana Hodage", role: "Team Member", linkedin: "https://www.linkedin.com/in/sanjana-hodage-082946367" },
-    { name: "Nikita Jadhav", role: "Team Member", linkedin: "https://www.linkedin.com/in/nikita-jadhav-6412993a3" },
+    { name: "Nikita Jadhav", role: "Team Member", linkedin: "https://www.linkedin.com/in/nikita-jadhav-74a8553a3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
     { name: "Akhilesh Patil", role: "Team Member", linkedin: "https://www.linkedin.com/in/akhilesh-gondepatil-03b9b43a1" },
   ];
 
